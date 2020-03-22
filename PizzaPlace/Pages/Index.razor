@@ -6,27 +6,57 @@
 
 @foreach (var item in State.Menu.Pizzas)
 {
-<div class="row">
+    <div class="row">
 
-    <div class="col">
-        @item.Name
-    </div>
-    <div class="col">
-        @item.Price
-    </div>
-    <div class="col">
-        <img src="@SpicinessImage(item.Spiciness)" alt="item.Spiciness" />
-    </div>
-    <div class="col">
-        <button class="btn btn-success" @onclick="(() => AddToBasket(item))">Add</button>
-    </div>
+        <div class="col">
+            @item.Name
+        </div>
+        <div class="col">
+            @item.Price
+        </div>
+        <div class="col">
+            <img src="@SpicinessImage(item.Spiciness)" alt="item.Spiciness" />
+        </div>
+        <div class="col">
+            <button class="btn btn-success" @onclick="(() => AddToBasket(item))">Add</button>
+        </div>
 
-</div>
+    </div>
 }
 
 
+<!-- End menu --> <!-- Shopping Basket -->
+@if (State.Basket.Orders.Any())
+{
+    <h1> Your current order </h1>
 
-@functions
+    @foreach (var (pizza, pos) in 
+        State.Basket.Orders.Select(
+            (id, pos) => (State.Menu.GetPizza(id), pos)))
+    {
+        <div class =" row">             
+            <div class =" col">@pizza.Name</div>             
+            <div class =" col">@pizza.Price</div>             
+            <div class =" col">                 
+                <button class =" btn btn-danger" @onclick ="(() => RemoveFromBasket(pos))">   
+                    Remove</button>             
+                </div>         
+            </div>
+     } 
+    
+    <div class =" row">         
+        <div class =" col">Total: </div>         
+        <div class =" col">@State.TotalPrice</div>         
+        <div class =" col"></div>     
+    </div>
+        
+        } 
+    
+    <!-- End shopping basket -->
+
+
+
+@code
 {
 
     private string SpicinessImage(Spiciness spiciness)
@@ -37,7 +67,7 @@
         Menu = new Menu
         {
             Pizzas = new List<Pizza>
-                {
+{
                     new Pizza(1, "Perporoni", 8.99M, Spiciness.Spicy),
                     new Pizza(2, "Margarita", 7.99M, Spiciness.None),
                     new Pizza(3, "Diablo", 9.99M, Spiciness.Hot)
@@ -46,10 +76,16 @@
 
     };
 
-    public void AddToBasket(Pizza pizza)
+    private void AddToBasket(Pizza pizza)
     {
         Console.WriteLine($"Added a pizza {pizza.Name}");
         State.Basket.Add(pizza.Id);
+    }
+
+    private void RemoveFromBasket(int pos)
+    {
+        Console.WriteLine($"Removing pizza at pos {pos}");
+        State.Basket.RemoveAt(pos);
     }
 
 }
