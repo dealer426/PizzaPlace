@@ -46,7 +46,7 @@
 
     };
 
-    private void AddToBasket(Pizza pizza)
+    public void AddToBasket(Pizza pizza)
     {
         Console.WriteLine($"Added a pizza {pizza.Name}");
         State.Basket.Add(pizza.Id);
