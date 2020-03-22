@@ -11,5 +11,15 @@ namespace PizzaPlace.Models
         public List<int> Orders { get; set; } = new List<int>();
         public bool HasPaid { get; set; } = false;
 
+        public Basket()
+        {
+
+        }
+
+        public void Add(int pizzaId)
+        {
+            Orders.Add(pizzaId);
+        }
+
     }
 }
