@@ -1,7 +1,26 @@
 ﻿@page "/"
+@using PizzaPlace.Models;
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+
+
+@functions
+{
+    private State State { get; } = new State()
+    {
+        Menu = new Menu
+        {
+            Pizzas = new List<Pizza>
+                {
+                    new Pizza(1, "Perporoni", 8.99M, Spiciness.Spicy),
+                    new Pizza(2, "Margarita", 7.99M, Spiciness.None),
+                    new Pizza(3, "Diablo", 9.99M, Spiciness.Hot)
+                }
+        }
+
+    };
+
+}
