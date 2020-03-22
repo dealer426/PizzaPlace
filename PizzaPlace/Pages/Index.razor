@@ -28,7 +28,8 @@
 <!-- End menu --> <!-- Shopping Basket -->
 @if (State.Basket.Orders.Any())
 {
-<h1> Your currenttly have @State.Basket.Orders.Count() @currentOrder(State.Basket.Orders.Count()) on order!</h1> 
+<h1> Your currenttly have @State.Basket.Orders.Count() 
+    @currentOrder(State.Basket.Orders.Count()) on order!</h1> 
 
 
     @foreach (var (pizza, pos) in 
@@ -91,11 +92,7 @@
 
     public string currentOrder(int count)
     {
-        if (count > 1)
-            return "Pizzas";
-        else
-            return "Pizza";
-
+            return (count > 1) ? "Pizzas" : "Pizza";
     }
 
 }
