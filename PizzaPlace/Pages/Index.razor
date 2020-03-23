@@ -35,8 +35,8 @@
 
 
     @foreach (var (pizza, pos) in
-      State.Basket.Orders.Select(
-          (id, pos) => (State.Menu.GetPizza(id), pos)))
+     State.Basket.Orders.Select(
+         (id, pos) => (State.Menu.GetPizza(id), pos)))
     {
         <div class=" row">
             <div class=" col">@pizza.Name</div>
@@ -60,7 +60,7 @@
 <!-- End shopping basket -->
 <!-- Customer entry -->
 @if (State.Basket.Orders.Any())
-{ 
+{
     <h1>Please enter your details below:</h1>
 
     <fieldset>
@@ -87,6 +87,14 @@
 
 }
 
+
+<Alert Show ="@ShowAlert">     
+    <span class ="oi oi-check mr-2" aria-hidden ="true"> </span>     
+    <strong>Blazor is soo cool! </strong> 
+    </Alert> 
+<button class =" btn btn-default" @onclick ="ToggleAlert">Toggle </button>
+
+
 @code
 {
 
@@ -99,7 +107,7 @@
         Menu = new Menu
         {
             Pizzas = new List<Pizza>
-{
+                {
                     new Pizza(1, "Perporoni", 8.99M, Spiciness.Spicy),
                     new Pizza(2, "Margarita", 7.99M, Spiciness.None),
                     new Pizza(3, "Diablo", 9.99M, Spiciness.Hot)
@@ -128,6 +136,13 @@
     private void PlaceOrder()
     {
         Console.WriteLine("Placing Order!");
+    }
+
+    public bool ShowAlert { get; set; } = true;
+
+    public void ToggleAlert()
+    {
+        ShowAlert = !ShowAlert;
     }
 
 }
