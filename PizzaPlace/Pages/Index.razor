@@ -88,9 +88,9 @@
 }
 
 
-<Alert Show ="@ShowAlert">     
+<Alert Show ="@ShowAlert" >     
     <span class ="oi oi-check mr-2" aria-hidden ="true"> </span>     
-    <strong>Blazor is soo cool! </strong> 
+    <strong>Blazor is soo cool!</strong> 
     </Alert> 
 <button class =" btn btn-default" @onclick ="ToggleAlert">Toggle </button>
 
@@ -139,6 +139,7 @@
     }
 
     public bool ShowAlert { get; set; } = true;
+
 
     public void ToggleAlert()
     {
